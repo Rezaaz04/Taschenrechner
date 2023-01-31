@@ -1,0 +1,53 @@
+namespace Kosten_Mathe
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void bttnBerechnen_Click(object sender, EventArgs e)
+        {
+            double a = Convert.ToDouble(tbA.Text);
+            double b = Convert.ToDouble(tbB.Text);
+            double c = Convert.ToDouble(tbC.Text);
+            double d = Convert.ToDouble(tbD.Text);
+            double x = Convert.ToDouble(tbX.Text);
+
+            rtbErgebnis.Text += "Stückkosten = " + StückkostenF(a, b, c, d, x) + "\n";
+            rtbErgebnis.Text += "Variable Gesamtkosten (Ohne Fixkosten) = " + VariableGKohneFix(a, b, c, x) + "\n";
+            rtbErgebnis.Text += "Variable Stückkosten = " + VariableStückkostenF(a, b, c, x) + "\n";
+            rtbErgebnis.Text += "Grenzkosten = " + GrenzkostenF(a, b, c, x) + "\n";
+        }
+
+        double StückkostenF(double a, double b, double c, double d, double x)
+        {
+            double ergebnis = a * Math.Pow(x, 2) + b * x + c + d / x;
+            return ergebnis;
+        }
+
+        double VariableGKohneFix(double a, double b, double c, double x)
+        {
+            double ergebnis = a * Math.Pow(x, 3) + b * Math.Pow(x, 2) + c * x;
+            return ergebnis;
+        }
+
+        double VariableStückkostenF(double a, double b, double c, double x)
+        {
+            double ergebnis = a * Math.Pow(x, 2) + b + x + c;
+            return ergebnis;
+        }
+
+        double GrenzkostenF(double a, double b, double c, double x)
+        {
+            double ergebnis = 3 * a * Math.Pow(x, 2) + 2 * b + x + c;
+            return ergebnis;
+        }
+
+        private void bttnReset_Click(object sender, EventArgs e)
+        {
+            rtbErgebnis.Text = "";
+        }
+    }
+}
